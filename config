@@ -1,0 +1,206 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+set $mod Mod1
+
+# No decoration
+new_window none
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+font pango:Monospace 8
+
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Control+Return exec roxterm
+
+# kill focused window
+bindsym $mod+Control+w kill
+
+# skype, steam, wine: float Gimp
+for_window [class="Code"] floating enable
+for_window [class="Gimp"] floating enable
+for_window [class="NES"] floating enable
+for_window [class="Portal"] floating enable
+for_window [class="Steam"] floating enable
+for_window [class="Tor Browser"] floating enable
+for_window [class="VirtualBox"] floating enable
+for_window [class="vlc"] floating enable
+for_window [class="Wine"] floating enable
+
+# lock screen
+bindsym $mod+l exec i3lock -c 111111
+
+# change focus
+bindsym control+$mod+j focus left
+bindsym control+$mod+k focus right
+
+# move to monitor
+bindsym mod4+Shift+l move workspace to output left
+bindsym mod4+Shift+h move workspace to output right
+bindsym mod4+Shift+k move workspace to output up
+bindsym mod4+Shift+j move workspace to output down
+
+#change focus monitor
+bindsym mod4+l focus output left
+bindsym mod4+h focus output right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym Control+$mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym mod4+s layout stacking
+bindsym mod4+w layout tabbed
+bindsym mod4+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+Control+h workspace prev
+bindsym $mod+Control+l workspace next
+
+# audio controls
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +10% && killall -SIGUSR1 i3status #increase sound volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -10% && killall -SIGUSR1 i3status #increase sound volume
+
+bindsym $mod+control+0 exec pactl set-sink-volume 1 +10% && killall -SIGUSR1 i3status #increase sound volume
+bindsym $mod+control+9 exec pactl set-sink-volume 1 -10% && killall -SIGUSR1 i3status #increase sound volume
+
+# screen brightness controls
+bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
+
+# Screenshots
+# Screenshot fullscreen
+bindsym Print exec "scrot -q 100 '/home/jessie/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 's3cmd put -P $f s3://s3.j3ss.co/screenshots/ && echo https://s3.j3ss.co/screenshots/$n | xclip -i -selection clipboard'"
+# Screenshot with selection
+bindsym $mod+Print exec "sleep 0.2; scrot -q 100 -s '/home/jessie/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 's3cmd put -P $f s3://s3.j3ss.co/screenshots/ && echo https://s3.j3ss.co/screenshots/$n | xclip -i -selection clipboard'"
+# Screenshot current focused window
+bindsym Shift+Print exec "scrot -q 100 -u '/home/jessie/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 's3cmd put -P $f s3://s3.j3ss.co/screenshots/ && echo https://s3.j3ss.co/screenshots/$n | xclip -i -selection clipboard'"
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px orj10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod4+r mode "resize"
+
+bindsym $mod+Control+r exec dmenu_run
+
+# i3status bar config
+bar {
+colors {
+        # Whole color settings
+        background #000000
+        statusline #ffffff
+        separator  #666666
+
+        # Type             border  background font
+        focused_workspace  #008fff #007fff #ffffff
+        active_workspace   #333333 #5f676a #ffffff
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #aa0000 #990000 #ffffff
+    }
+    # i3bar position
+    position top
+	font pango:monospace 8
+	status_command i3status --config ~/.i3/status.conf
+}
+
+# auto run commands
+# set background
+exec feh --bg-scale /home/talkdesk/setup_my_new_computer/cheatsheet/wallpaper.png
+
+# run the merge for good colors
+# exec xrdb -merge /home/jessie/.Xresources
+# exec xrdb -merge /home/jessie/.Xdefaults
+
+# startup programs
+exec --no-startup-id i3-msg 'workspace "2: terminal"; exec roxterm'
+exec --no-startup-id i3-msg 'workspace "3: browser"; exec chromium-browser;'
+
+assign [class="^Roxterm$"] "2: terminal"
+assign [class="^Chromium-browser$"] "3: browser"
+
+# switch to workspace
+bindsym $mod+1 workspace 1: comm
+bindsym $mod+2 workspace 2: terminal
+bindsym $mod+3 workspace 3: browser
+bindsym $mod+4 workspace 4: extra
+bindsym $mod+5 workspace 5: spotify
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10: hipchat
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1: comm
+bindsym $mod+Shift+2 move container to workspace 2: terminal
+bindsym $mod+Shift+3 move container to workspace 3: browser
+bindsym $mod+Shift+4 move container to workspace 4: extra
+bindsym $mod+Shift+5 move container to workspace 5: spotify
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10: hipchat
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Control+n move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+Control+m scratchpad show
