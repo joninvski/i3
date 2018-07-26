@@ -32,10 +32,7 @@ bindsym $mod+Control+w kill
 # skype, steam, wine: float Gimp
 for_window [class="Code"] floating enable
 for_window [class="Gimp"] floating enable
-for_window [class="NES"] floating enable
-for_window [class="Portal"] floating enable
 for_window [class="Steam"] floating enable
-for_window [class="Tor Browser"] floating enable
 for_window [class="VirtualBox"] floating enable
 for_window [class="vlc"] floating enable
 for_window [class="Wine"] floating enable
@@ -96,23 +93,22 @@ bindsym $mod+Control+h workspace prev
 bindsym $mod+Control+l workspace next
 
 # audio controls
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +10% && killall -SIGUSR1 i3status #increase sound volume
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -10% && killall -SIGUSR1 i3status #increase sound volume
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10% || killall -SIGUSR1 i3status #lower sound volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10% || killall -SIGUSR1 i3status #lower sound volume
 
-bindsym $mod+control+0 exec pactl set-sink-volume 0 +10% && killall -SIGUSR1 i3status #increase sound volume
-bindsym $mod+control+9 exec pactl set-sink-volume 0 -10% && killall -SIGUSR1 i3status #increase sound volume
+bindsym $mod+control+0 exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10% || killall -SIGUSR1 i3status #lower sound volume
+bindsym $mod+control+9 exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10% || killall -SIGUSR1 i3status #lower sound volume
 
 # screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10% # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dev 10% # decrease screen brightness
+bindsym $mod+control+5 exec xbacklight -dev 10% # decrease screen brightness
+bindsym $mod+control+6 exec xbacklight -inc 10% # increase screen brightness
 
 # Screenshots
 # Screenshot fullscreen
-bindsym Print exec "scrot -q 100 '/home/jessie/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 's3cmd put -P $f s3://s3.j3ss.co/screenshots/ && echo https://s3.j3ss.co/screenshots/$n | xclip -i -selection clipboard'"
+bindsym Print exec "scrot -q 100 '${HOME}/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_$wx$h.png'"
 # Screenshot with selection
-bindsym $mod+Print exec "sleep 0.2; scrot -q 100 -s '/home/jessie/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 's3cmd put -P $f s3://s3.j3ss.co/screenshots/ && echo https://s3.j3ss.co/screenshots/$n | xclip -i -selection clipboard'"
-# Screenshot current focused window
-bindsym Shift+Print exec "scrot -q 100 -u '/home/jessie/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 's3cmd put -P $f s3://s3.j3ss.co/screenshots/ && echo https://s3.j3ss.co/screenshots/$n | xclip -i -selection clipboard'"
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -169,10 +165,11 @@ bar {
 # auto run commands
 # set background
 exec feh --bg-scale /home/talkdesk/setup_my_new_computer/cheatsheet/wallpaper.png
+exec xautolock -detectsleep -time 3 -locker "i3lock -c 111111" -notify 30 -notifier "notify-send -u critical -t 1000 -- Will lock screen in 30s"
 
 # run the merge for good colors
-# exec xrdb -merge /home/jessie/.Xresources
-# exec xrdb -merge /home/jessie/.Xdefaults
+# exec xrdb -merge ${HOME}/.Xresources
+# exec xrdb -merge ${HOME}/.Xdefaults
 
 # startup programs
 exec --no-startup-id i3-msg 'workspace "2: terminal"; exec gnome-terminal'
@@ -187,7 +184,7 @@ bindsym $mod+2 workspace 2: terminal
 bindsym $mod+3 workspace 3: browser
 bindsym $mod+4 workspace 4: extra
 bindsym $mod+5 workspace 5: spotify
-bindsym $mod+6 workspace 6
+bindsym $mod+6 workspace 6: extra
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
