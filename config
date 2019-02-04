@@ -180,18 +180,18 @@ exec xautolock -detectsleep -time 3 -locker "i3lock -c 111111" -notify 30 -notif
 
 # startup programs
 exec --no-startup-id i3-msg 'workspace "2: terminal"; exec gnome-terminal'
-exec --no-startup-id i3-msg 'workspace "3: browser"; exec chromium-browser;'
+exec --no-startup-id i3-msg 'workspace "3: browser"; exec firefox;'
 
 assign [class="^Gnome-terminal$"] "2: terminal"
-assign [class="^Chromium-browser$"] "3: browser"
+assign [class="^firefox$"] "3: browser"
 
 # switch to workspace
 bindsym $mod+1 workspace 1: comm
 bindsym $mod+2 workspace 2: terminal
 bindsym $mod+3 workspace 3: browser
-bindsym $mod+4 workspace 4: extra
-bindsym $mod+5 workspace 5: spotify
-bindsym $mod+6 workspace 6: extra
+bindsym $mod+4 workspace 4: music
+bindsym $mod+5 workspace 5: extra
+bindsym $mod+6 workspace 6: extra2
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
