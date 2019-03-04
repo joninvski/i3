@@ -93,14 +93,14 @@ bindsym $mod+Control+h workspace prev
 bindsym $mod+Control+l workspace next
 
 # audio controls
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10% || killall -SIGUSR1 i3status #lower sound volume
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10% || killall -SIGUSR1 i3status #lower sound volume
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10%; exec pactl set-sink-volume alsa_output.usb-DisplayLink_Plugable_UD-ULTCDL_60893550-02.analog-stereo +10%; exec pactl set-sink-volume alsa_output.usb-DisplayLink_Plugable_UD-ULTCDL_60893550-02.iec958-stereo +10%; exec killall -SIGUSR1 i3status #lower sound volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10%; exec pactl set-sink-volume alsa_output.usb-DisplayLink_Plugable_UD-ULTCDL_60893550-02.analog-stereo -10%; exec pactl set-sink-volume alsa_output.usb-DisplayLink_Plugable_UD-ULTCDL_60893550-02.iec958-stereo -10%; exec killall -SIGUSR1 i3status #lower sound volume
 
-bindsym $mod+control+0 exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10% || killall -SIGUSR1 i3status #lower sound volume
-bindsym $mod+control+9 exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10% || killall -SIGUSR1 i3status #lower sound volume
+bindsym $mod+control+0 exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10%; exec pactl set-sink-volume alsa_output.usb-DisplayLink_Plugable_UD-ULTCDL_60893550-02.analog-stereo +10%; exec pactl set-sink-volume alsa_output.usb-DisplayLink_Plugable_UD-ULTCDL_60893550-02.iec958-stereo +10%; exec killall -SIGUSR1 i3status #lower sound volume
+bindsym $mod+control+9 exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10%; exec pactl set-sink-volume alsa_output.usb-DisplayLink_Plugable_UD-ULTCDL_60893550-02.analog-stereo -10%; exec pactl set-sink-volume alsa_output.usb-DisplayLink_Plugable_UD-ULTCDL_60893550-02.iec958-stereo -10%; exec killall -SIGUSR1 i3status #lower sound volume
 
 # Screen management
-bindsym $mod+control+1 exec sh ${HOME}/.screenlayout/work_table_left.sh
+bindsym $mod+control+1 exec sh ${HOME}/.screenlayout/workspace3.sh
 bindsym $mod+control+2 exec sh ${HOME}/.screenlayout/laptop.sh
 bindsym $mod+control+3 exec sh ${HOME}/.screenlayout/work_table_right.sh
 bindsym $mod+control+4 exec sh ${HOME}/.screenlayout/meeting_hdmi.sh
@@ -195,19 +195,19 @@ bindsym $mod+6 workspace 6: extra2
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10: hipchat
+bindsym $mod+0 workspace 10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1: comm
 bindsym $mod+Shift+2 move container to workspace 2: terminal
 bindsym $mod+Shift+3 move container to workspace 3: browser
-bindsym $mod+Shift+4 move container to workspace 4: extra
-bindsym $mod+Shift+5 move container to workspace 5: spotify
-bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+4 move container to workspace 4: music
+bindsym $mod+Shift+5 move container to workspace 5: extra
+bindsym $mod+Shift+6 move container to workspace 6: extra2
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10: hipchat
+bindsym $mod+Shift+0 move container to workspace 10
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Control+n move scratchpad
