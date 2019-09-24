@@ -119,9 +119,7 @@ bindsym $mod+control+5 exec xbacklight -dev 10% # decrease screen brightness
 bindsym $mod+control+6 exec xbacklight -inc 10% # increase screen brightness
 
 # Screenshots
-# Screenshot fullscreen
-bindsym Print exec "scrot -q 100 '${HOME}/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_$wx$h.png'"
-# Screenshot with selection
+bindsym control+$mod+p exec flameshot gui
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
