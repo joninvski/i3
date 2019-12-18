@@ -6,6 +6,10 @@ set $mod Mod1
 
 # No decoration
 new_window none
+default_border pixel 1
+default_floating_border normal
+# Hide borders
+hide_edge_borders smart
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -43,8 +47,9 @@ for_window [window_role="CallWindow"] floating enable
 bindsym $mod+l exec i3lock -c 111111 -i /home/jtrindade/andy.png -t -f
 
 # change focus
-bindsym control+$mod+j focus left
-bindsym control+$mod+k focus right
+bindsym control+$mod+j focus output left
+bindsym control+$mod+k focus output left
+
 
 # move to monitor
 bindsym mod4+Shift+l move workspace to output left
@@ -53,8 +58,10 @@ bindsym mod4+Shift+k move workspace to output up
 bindsym mod4+Shift+j move workspace to output down
 
 #change focus monitor
-bindsym mod4+l focus output left
-bindsym mod4+h focus output right
+bindsym mod4+l focus left
+bindsym mod4+h focus right
+bindsym mod4+j focus down
+bindsym mod4+k focus up
 
 # move focused window
 bindsym $mod+Shift+h move left
