@@ -104,14 +104,14 @@ bindsym $mod+Control+h workspace prev
 bindsym $mod+Control+l workspace next
 
 # audio controls
-bindsym XF86AudioRaiseVolume exec volume-up
-bindsym XF86AudioLowerVolume exec volume-down
+bindsym XF86AudioRaiseVolume exec volume up 2
+bindsym XF86AudioLowerVolume exec volume down 2
 
 # bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks
 # bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
 
-bindsym $mod+control+0 exec volume-up
-bindsym $mod+control+9 exec volume-down
+bindsym $mod+control+0 exec volume up 10
+bindsym $mod+control+9 exec volume down 10
 
 bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 
@@ -120,10 +120,9 @@ bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2
 bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 
 # Screen management
-bindsym $mod+control+1 exec sh ${HOME}/.screenlayout/home.sh
-bindsym $mod+control+2 exec sh ${HOME}/.screenlayout/laptop.sh
-bindsym $mod+control+3 exec sh ${HOME}/.screenlayout/work_table_right.sh
-bindsym $mod+control+4 exec sh ${HOME}/.screenlayout/meeting_hdmi.sh
+bindsym $mod+control+1 exec sh ${HOME}/.screenlayout/home_3_screens.sh
+bindsym $mod+control+2 exec sh ${HOME}/.screenlayout/laptop_alone.sh
+bindsym $mod+control+3 exec sh ${HOME}/.screenlayout/work_2_screens.sh
 
 # screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10% # increase screen brightness
@@ -200,10 +199,8 @@ exec xautolock -detectsleep -time 3 -locker "i3lock -c 111111" -notify 30 -notif
 
 # startup programs
 exec --no-startup-id i3-msg 'workspace "2: terminal"; exec gnome-terminal'
-exec --no-startup-id i3-msg 'workspace "3: browser"; exec firefox;'
+exec --no-startup-id i3-msg 'workspace "3: browser"; exec brave-browser;'
 exec --no-startup-id 'nm-applet'
-exec --no-startup-id 'blueman-applet'
-exec --no-startup-id 'pasystray'
 
 assign [class="^Gnome-terminal$"] "2: terminal"
 assign [class="^spotify$"] "4: music"
